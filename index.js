@@ -94,9 +94,11 @@ function nodeTag(node) {
 		case 'DoWhileStatement': return decorate(exprTag);
 		case 'ThrowStatement': return decorate(exprTag);
 		case 'FunctionDeclaration': break;
+		case 'ContinueStatement': break;
 		case 'FunctionExpression': break;
 		case 'LabeledStatement': break;
 		case 'BreakStatement': break;
+		case 'SwitchCase': break;
 		default: throw new Error('unrecognized identifier parent ' + node.parent.type);
 		}
 		return undefined;
@@ -182,6 +184,8 @@ function nodeTag(node) {
 
 	} else if (node.type === 'Program') {
 		return decorate({ name: 'program', classes: [] });
+	} else if (node.type === 'WithStatement') {
+		return decorate({ name: 'statement', classes: ['with'] });
 	}
 	// console.error(node);
 	// console.error(node.source());
